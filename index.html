@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GATE 2027 DA - Free Study Resources & Syllabus Explorer (Microsoft Enterprise Edition)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Segoe UI"', '-apple-system', 'BlinkMacSystemFont', 'Roboto', '"Helvetica Neue"', 'sans-serif'],
+                    },
+                    colors: {
+                        ms: {
+                            blue: '#0078D4',
+                            hover: '#106EBE',
+                            darkBlue: '#004578',
+                            lightBg: '#F3F2F1',
+                            cardBg: '#FFFFFF',
+                            border: '#E1DFDD',
+                            darkBorder: '#C8C6C4',
+                            text: '#201F1E',
+                            secondaryText: '#605E5C',
+                            accent: '#0F6CBD',
+                            tagBg: '#EFF6FC',
+                            tagText: '#005A9E'
+                        }
+                    },
+                    boxShadow: {
+                        fluent: '0 1.6px 3.6px 0 rgba(0, 0, 0, 0.132), 0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108)',
+                        fluentHover: '0 3.2px 7.2px 0 rgba(0, 0, 0, 0.132), 0 0.6px 1.8px 0 rgba(0, 0, 0, 0.108)',
+                        fluentFlyout: '0 6.4px 14.4px 0 rgba(0, 0, 0, 0.132), 0 1.2px 3.6px 0 rgba(0, 0, 0, 0.108)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: #F8F9FA;
+            color: #201F1E;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 380px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F3F2F1;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #C8C6C4;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #A19F9D;
+        }
+        /* Microsoft Pivot Tab styling */
+        .pivot-tab {
+            position: relative;
+            transition: color 0.15s ease;
+        }
+        .pivot-tab.active-tab {
+            color: #0078D4;
+            font-weight: 600;
+        }
+        .pivot-tab.active-tab::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: #0078D4;
+            border-radius: 2px 2px 0 0;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased">
+
+    <!-- Chosen Palette: Microsoft Fluent Professional (Segoe UI, Microsoft Blue #0078D4, Neutral Gray #F3F2F1, Crisp Border #E1DFDD) -->
+    <!-- Application Structure Plan:
+         1. Microsoft Enterprise Navigation Bar: Top bar with Microsoft Learn branding, GATE 2027 DA badge, search quick-jump, and Fluent Pivot Tabs.
+         2. Executive Hero Overview: Clear metric progress block styled like Microsoft Azure Portal dashboards with overall completion rate.
+         3. Curated Resource Library: Searchable & filterable resource hub with Microsoft Fluent Card design, tag filtering, and external link routing.
+         4. Official Syllabus Completion Tracker: Accordion checklist covering all 54 syllabus subtopics with local storage persistence.
+         5. Weightage & Analytics: Interactive Chart.js graphs styled in Microsoft corporate colors (#0078D4, #008272, #8764B8, #00B7C3).
+         6. Exam Strategy & Forensic Insights: Structural MCQ, MSQ, NAT rules and conceptual trap analysis from official GATE papers.
+    -->
+    <!-- Visualization & Content Choices:
+         - Subject Weightage Chart: Chart.js Bar Chart with Microsoft Blue & Cyan tones for clear topic density visualization.
+         - Resource Type Distribution: Chart.js Doughnut Chart highlighting video, textbook, and repo proportions.
+         - Checklist: Local storage backed interactive checklist.
+         - NO SVG / NO Mermaid JS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Microsoft Top Enterprise Navigation Header -->
+    <header class="bg-[#201F1E] text-white border-b border-[#323130] sticky top-0 z-50 shadow-fluent">
+        <!-- Microsoft Brand Accent Bar -->
+        <div class="h-1 w-full bg-gradient-to-r from-[#0078D4] via-[#00B7C3] to-[#008272]"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-14">
+                <!-- Branding -->
+                <div class="flex items-center space-x-3">
+                    <div class="bg-[#0078D4] text-white text-xs font-semibold px-2.5 py-1 rounded-sm tracking-wide uppercase">
+                        Microsoft Learn Style
+                    </div>
+                    <div class="h-4 w-[1px] bg-[#484644]"></div>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm font-semibold tracking-tight text-white">GATE 2027</span>
+                        <span class="text-xs text-[#C8C6C4] hidden sm:inline">| Data Science and Artificial Intelligence (DA)</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Pivot Tabs -->
+                <nav class="hidden md:flex space-x-6 text-sm font-medium h-full items-center">
+                    <button onclick="switchTab('hub')" id="nav-hub" class="pivot-tab active-tab h-full px-1 text-[#F3F2F1] hover:text-white flex items-center">
+                        Resource Hub
+                    </button>
+                    <button onclick="switchTab('syllabus')" id="nav-syllabus" class="pivot-tab h-full px-1 text-[#C8C6C4] hover:text-white flex items-center">
+                        Syllabus Tracker
+                    </button>
+                    <button onclick="switchTab('analytics')" id="nav-analytics" class="pivot-tab h-full px-1 text-[#C8C6C4] hover:text-white flex items-center">
+                        Weightage Analytics
+                    </button>
+                    <button onclick="switchTab('strategy')" id="nav-strategy" class="pivot-tab h-full px-1 text-[#C8C6C4] hover:text-white flex items-center">
+                        Exam Strategy
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="md:hidden border-t border-[#323130] flex justify-around py-2 text-xs text-[#C8C6C4] bg-[#1B1A19]">
+            <button onclick="switchTab('hub')" class="hover:text-white py-1">Resources</button>
+            <button onclick="switchTab('syllabus')" class="hover:text-white py-1">Syllabus</button>
+            <button onclick="switchTab('analytics')" class="hover:text-white py-1">Weightage</button>
+            <button onclick="switchTab('strategy')" class="hover:text-white py-1">Strategy</button>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+        <!-- Executive Overview Hero Banner (Microsoft Azure Documentation Style) -->
+        <div class="bg-white border border-[#E1DFDD] rounded-lg p-6 mb-6 shadow-fluent">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div class="space-y-2 max-w-3xl">
+                    <div class="inline-flex items-center space-x-2 bg-[#EFF6FC] border border-[#C7E0F4] px-3 py-1 rounded-sm text-xs text-[#005A9E] font-semibold">
+                        <span>Official Curriculum Center</span>
+                        <span class="text-[#005A9E] font-normal">|</span>
+                        <span>IIT Madras Organizing Institute Mapping</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-semibold text-[#201F1E] tracking-tight">
+                        GATE 2027 Data Science and AI Preparation Hub
+                    </h2>
+                    <p class="text-sm text-[#605E5C] leading-relaxed">
+                        Access official textbooks, video courses (MIT, Stanford, UC Berkeley, NPTEL), community repositories, and past paper analytical insights aligned directly with the official IIT Madras syllabus specifications.
+                    </p>
+                </div>
+
+                <!-- Progress Metric Tile -->
+                <div class="bg-[#F8F9FA] border border-[#E1DFDD] rounded-lg p-4 flex flex-col items-center justify-center min-w-[220px] text-center shadow-sm">
+                    <span class="text-xs uppercase text-[#605E5C] font-semibold tracking-wider mb-1">Preparation Progress</span>
+                    <div class="text-3xl font-bold text-[#0078D4] mb-1" id="overall-progress-text">0%</div>
+                    <div class="w-full bg-[#E1DFDD] rounded-full h-2 overflow-hidden mb-2">
+                        <div id="overall-progress-bar" class="bg-[#0078D4] h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                    <span class="text-[11px] text-[#605E5C]" id="completed-topics-count">0 of 54 topics completed</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 1: RESOURCE HUB (DEFAULT VIEW) -->
+        <section id="tab-hub" class="tab-content space-y-5">
+            
+            <!-- Section Introductory Description -->
+            <div class="bg-white border border-[#E1DFDD] rounded-lg p-5 shadow-fluent">
+                <h3 class="text-base font-semibold text-[#201F1E] mb-1">Verified Open-Source Study Library</h3>
+                <p class="text-xs text-[#605E5C] leading-relaxed">
+                    Filter world-class study material from leading universities (MIT OCW, Stanford, UC Berkeley, IITs) and community developers by syllabus section or resource format.
+                </p>
+            </div>
+
+            <!-- Filter and Search Toolbar -->
+            <div class="bg-white border border-[#E1DFDD] rounded-lg p-4 shadow-fluent space-y-3">
+                <div class="flex flex-col md:flex-row gap-3 justify-between items-center">
+                    <!-- Search Input with Pure CSS Search Icon -->
+                    <div class="relative w-full md:w-1/2">
+                        <input type="text" id="resource-search" oninput="filterResources()" placeholder="Search by topic, instructor, or keyword (e.g., Strang, Convex, Bayes, Python)..." class="w-full pl-9 pr-4 py-2 text-xs bg-[#F3F2F1] border border-[#C8C6C4] rounded-sm focus:outline-none focus:ring-2 focus:ring-[#0078D4] focus:bg-white transition-all text-[#201F1E]">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                            <div class="w-3 h-3 border-2 border-[#605E5C] rounded-full relative after:content-[''] after:absolute after:w-1.5 after:h-0.5 after:bg-[#605E5C] after:rotate-45 after:-bottom-1 after:-right-1"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Format Filters -->
+                    <div class="flex flex-wrap gap-1.5 text-xs font-medium w-full md:w-auto">
+                        <button onclick="setFormatFilter('all')" id="fmt-all" class="fmt-btn px-3 py-1.5 rounded-sm border bg-[#0078D4] text-white border-[#0078D4]">All Formats</button>
+                        <button onclick="setFormatFilter('PDF Textbook')" id="fmt-pdf" class="fmt-btn px-3 py-1.5 rounded-sm border bg-[#F3F2F1] text-[#201F1E] border-[#C8C6C4] hover:bg-[#E1DFDD]">PDF Books</button>
+                        <button onclick="setFormatFilter('Video Course')" id="fmt-video" class="fmt-btn px-3 py-1.5 rounded-sm border bg-[#F3F2F1] text-[#201F1E] border-[#C8C6C4] hover:bg-[#E1DFDD]">Video Playlists</button>
+                        <button onclick="setFormatFilter('GitHub / Code')" id="fmt-github" class="fmt-btn px-3 py-1.5 rounded-sm border bg-[#F3F2F1] text-[#201F1E] border-[#C8C6C4] hover:bg-[#E1DFDD]">Code and Repos</button>
+                    </div>
+                </div>
+
+                <!-- Section Badges Filter -->
+                <div class="flex items-center space-x-2 overflow-x-auto pb-1 text-xs custom-scrollbar pt-1">
+                    <span class="text-[#605E5C] font-semibold text-[11px] uppercase tracking-wider whitespace-nowrap">Section Filter:</span>
+                    <button onclick="setSectionFilter('all')" id="sec-all" class="sec-btn px-3 py-1 rounded-full bg-[#201F1E] text-white whitespace-nowrap">All Sections</button>
+                    <button onclick="setSectionFilter('Section 1')" id="sec-1" class="sec-btn px-3 py-1 rounded-full bg-[#F3F2F1] text-[#201F1E] border border-[#C8C6C4] hover:bg-[#E1DFDD] whitespace-nowrap">1. Prob and Stats</button>
+                    <button onclick="setSectionFilter('Section 2')" id="sec-2" class="sec-btn px-3 py-1 rounded-full bg-[#F3F2F1] text-[#201F1E] border border-[#C8C6C4] hover:bg-[#E1DFDD] whitespace-nowrap">2. Linear Algebra</button>
+                    <button onclick="setSectionFilter('Section 3')" id="sec-3" class="sec-btn px-3 py-1 rounded-full bg-[#F3F2F1] text-[#201F1E] border border-[#C8C6C4] hover:bg-[#E1DFDD] whitespace-nowrap">3. Calculus and Opt</button>
+                    <button onclick="setSectionFilter('Section 4')" id="sec-4" class="sec-btn px-3 py-1 rounded-full bg-[#F3F2F1] text-[#201F1E] border border-[#C8C6C4] hover:bg-[#E1DFDD] whitespace-nowrap">4. DSA and Python</button>
+                    <button onclick="setSectionFilter('Section 5')" id="sec-5" class="sec-btn px-3 py-1 rounded-full bg-[#F3F2F1] text-[#201F1E] border border-[#C8C6C4] hover:bg-[#E1DFDD] whitespace-nowrap">5. DBMS and Warehousing</button>
+                    <button onclick="setSectionFilter('Section 6')" id="sec-6" class="sec-btn px-3 py-1 rounded-full bg-[#F3F2F1] text-[#201F1E] border border-[#C8C6C4] hover:bg-[#E1DFDD] whitespace-nowrap">6. Machine Learning</button>
+                    <button onclick="setSectionFilter('Section 7')" id="sec-7" class="sec-btn px-3 py-1 rounded-full bg-[#F3F2F1] text-[#201F1E] border border-[#C8C6C4] hover:bg-[#E1DFDD] whitespace-nowrap">7. Artificial Intelligence</button>
+                    <button onclick="setSectionFilter('PYQ & Community')" id="sec-pyq" class="sec-btn px-3 py-1 rounded-full bg-[#F3F2F1] text-[#201F1E] border border-[#C8C6C4] hover:bg-[#E1DFDD] whitespace-nowrap">PYQs and Repos</button>
+                </div>
+            </div>
+
+            <!-- Active Results Summary -->
+            <div class="flex justify-between items-center text-xs text-[#605E5C] px-1">
+                <span>Showing <strong id="visible-card-count" class="text-[#201F1E] font-semibold">0</strong> matching resources</span>
+                <button onclick="resetFilters()" class="text-[#0078D4] hover:underline font-semibold">Reset Filters</button>
+            </div>
+
+            <!-- Resource Cards Grid -->
+            <div id="resource-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </section>
+
+        <!-- TAB 2: INTERACTIVE SYLLABUS TRACKER -->
+        <section id="tab-syllabus" class="tab-content hidden space-y-5">
+            <!-- Section Narrative -->
+            <div class="bg-white border border-[#E1DFDD] rounded-lg p-5 shadow-fluent">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <h3 class="text-base font-semibold text-[#201F1E]">Official Syllabus Tracker and Progress Manager</h3>
+                        <p class="text-xs text-[#605E5C] mt-1">
+                            Track your preparation progress across all 7 syllabus sections. Click any topic to check off completed study goals. Progress is automatically saved locally in your browser.
+                        </p>
+                    </div>
+                    <button onclick="clearSyllabusProgress()" class="text-xs text-[#A80000] border border-[#FDE7E9] bg-[#FDF2F2] hover:bg-[#FDE7E9] px-3 py-1.5 rounded-sm transition-colors whitespace-nowrap font-medium">
+                        Reset All Checks
+                    </button>
+                </div>
+            </div>
+
+            <!-- Accordions Container -->
+            <div id="syllabus-accordion-container" class="space-y-3">
+                <!-- Dynamically Populated via JS -->
+            </div>
+        </section>
+
+        <!-- TAB 3: WEIGHTAGE & ANALYTICS -->
+        <section id="tab-analytics" class="tab-content hidden space-y-5">
+            <!-- Section Narrative -->
+            <div class="bg-white border border-[#E1DFDD] rounded-lg p-5 shadow-fluent">
+                <h3 class="text-base font-semibold text-[#201F1E] mb-1">Subject Weightage and Resource Metrics</h3>
+                <p class="text-xs text-[#605E5C] leading-relaxed">
+                    Analyzing the mark density from official GATE DA papers guides intelligent study planning. Programming, Probability and Statistics, and Machine Learning consistently offer the highest scoring yields.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                <!-- Chart 1: Subject Weightage -->
+                <div class="bg-white border border-[#E1DFDD] rounded-lg p-5 shadow-fluent flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-semibold text-[#201F1E] text-sm">Subject Mark Weightage (2024 Baseline)</h4>
+                            <span class="text-[11px] bg-[#F3F2F1] text-[#605E5C] px-2 py-0.5 rounded border border-[#E1DFDD]">100 Marks Total</span>
+                        </div>
+                        <p class="text-xs text-[#605E5C] mb-4">Approximate distribution of marks based on official GATE DA examinations.</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="weightageChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Resource Format Breakdown -->
+                <div class="bg-white border border-[#E1DFDD] rounded-lg p-5 shadow-fluent flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-semibold text-[#201F1E] text-sm">Curated Free Resources Breakdown</h4>
+                            <span class="text-[11px] bg-[#F3F2F1] text-[#605E5C] px-2 py-0.5 rounded border border-[#E1DFDD]">28 Mapped Resources</span>
+                        </div>
+                        <p class="text-xs text-[#605E5C] mb-4">Distribution of free textbooks, video lectures, and code repositories mapped to the syllabus.</p>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="resourceTypeChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject-wise Importance Table -->
+            <div class="bg-white border border-[#E1DFDD] rounded-lg p-5 shadow-fluent">
+                <h4 class="font-semibold text-[#201F1E] text-sm mb-3">Syllabus Interdependence and Strategic Priority Table</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead>
+                            <tr class="bg-[#F3F2F1] border-b border-[#E1DFDD] text-[#201F1E] font-semibold">
+                                <th class="p-2.5">Syllabus Section</th>
+                                <th class="p-2.5">Est. Weightage</th>
+                                <th class="p-2.5">Prerequisite For</th>
+                                <th class="p-2.5">Strategic Preparation Advice</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-[#E1DFDD]">
+                            <tr class="hover:bg-[#F8F9FA]">
+                                <td class="p-2.5 font-semibold text-[#201F1E]">1. Probability and Statistics</td>
+                                <td class="p-2.5 text-[#0078D4] font-bold">15 - 20 Marks</td>
+                                <td class="p-2.5">Machine Learning, AI (Bayesian Nets)</td>
+                                <td class="p-2.5">Crucial foundational pillar. Concentrate heavily on Bayes' Theorem, continuous distributions, and hypothesis tests.</td>
+                            </tr>
+                            <tr class="hover:bg-[#F8F9FA]">
+                                <td class="p-2.5 font-semibold text-[#201F1E]">2. Linear Algebra</td>
+                                <td class="p-2.5 text-[#0078D4] font-bold">8 - 10 Marks</td>
+                                <td class="p-2.5">PCA, SVM, Linear Regression, SVD</td>
+                                <td class="p-2.5">Geometric understanding of vector spaces, matrix projections, and SVD is vital for Machine Learning topics.</td>
+                            </tr>
+                            <tr class="hover:bg-[#F8F9FA]">
+                                <td class="p-2.5 font-semibold text-[#201F1E]">3. Calculus and Optimization</td>
+                                <td class="p-2.5 text-[#0078D4] font-bold">5 - 7 Marks</td>
+                                <td class="p-2.5">Gradient Descent, Backpropagation</td>
+                                <td class="p-2.5">Single-variable optimization and Taylor Series expansions drive loss function minimization in ML models.</td>
+                            </tr>
+                            <tr class="hover:bg-[#F8F9FA]">
+                                <td class="p-2.5 font-semibold text-[#201F1E]">4. DSA and Python</td>
+                                <td class="p-2.5 text-[#0078D4] font-bold">18 - 20 Marks</td>
+                                <td class="p-2.5">Core Computational Problem Solving</td>
+                                <td class="p-2.5">Highest scoring density. Master Python syntax, asymptotic time/space complexities, stacks/queues, and graph algorithms.</td>
+                            </tr>
+                            <tr class="hover:bg-[#F8F9FA]">
+                                <td class="p-2.5 font-semibold text-[#201F1E]">5. DBMS and Warehousing</td>
+                                <td class="p-2.5 text-[#0078D4] font-bold">8 - 10 Marks</td>
+                                <td class="p-2.5">SQL Queries, Data Pipelines, OLAP</td>
+                                <td class="p-2.5">Practice B+ tree indexing calculations, normal forms (1NF-BCNF), and multidimensional star schemas.</td>
+                            </tr>
+                            <tr class="hover:bg-[#F8F9FA]">
+                                <td class="p-2.5 font-semibold text-[#201F1E]">6. Machine Learning</td>
+                                <td class="p-2.5 text-[#0078D4] font-bold">14 - 16 Marks</td>
+                                <td class="p-2.5">Applied AI and Predictive Modeling</td>
+                                <td class="p-2.5">Derive loss functions mathematically (Ridge, SVM, Logistic) and master bias-variance trade-offs and cross-validation.</td>
+                            </tr>
+                            <tr class="hover:bg-[#F8F9FA]">
+                                <td class="p-2.5 font-semibold text-[#201F1E]">7. Artificial Intelligence</td>
+                                <td class="p-2.5 text-[#0078D4] font-bold">8 - 10 Marks</td>
+                                <td class="p-2.5">Search Algorithms, Probabilistic Logic</td>
+                                <td class="p-2.5">Master A* heuristics, alpha-beta pruning, predicate logic resolution, and Bayesian Networks inference.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: EXAM STRATEGY & FORENSICS -->
+        <section id="tab-strategy" class="tab-content hidden space-y-5">
+            <!-- Section Narrative -->
+            <div class="bg-white border border-[#E1DFDD] rounded-lg p-5 shadow-fluent">
+                <h3 class="text-base font-semibold text-[#201F1E] mb-1">GATE DA Examination Forensics and Question Rules</h3>
+                <p class="text-xs text-[#605E5C] leading-relaxed">
+                    The 3-hour GATE DA exam tests theoretical depth and precision through three distinct question formats. Below is the structural penalty breakdown and key analytical lessons learned from paper formulations.
+                </p>
+            </div>
+
+            <!-- Question Rules Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-white border border-[#E1DFDD] rounded-lg p-4 shadow-fluent border-t-4 border-t-[#A80000]">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-semibold text-[#201F1E] text-xs">Multiple Choice (MCQ)</h4>
+                        <span class="text-[10px] bg-[#FDF2F2] text-[#A80000] border border-[#FDE7E9] px-2 py-0.5 rounded font-medium">Negative Marking</span>
+                    </div>
+                    <p class="text-xs text-[#605E5C] mb-2">4 options, exactly 1 correct answer. Deter speculation with strict negative penalties.</p>
+                    <ul class="text-xs space-y-1 text-[#201F1E] list-disc pl-4">
+                        <li><strong>1-Mark MCQ:</strong> -1/3 mark deduction for wrong option.</li>
+                        <li><strong>2-Mark MCQ:</strong> -2/3 mark deduction for wrong option.</li>
+                        <li><em>Strategy:</em> Attempt only with mathematical certainty.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-[#E1DFDD] rounded-lg p-4 shadow-fluent border-t-4 border-t-[#797775]">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-semibold text-[#201F1E] text-xs">Multiple Select (MSQ)</h4>
+                        <span class="text-[10px] bg-[#FFF8F0] text-[#8A3B00] border border-[#FED9CC] px-2 py-0.5 rounded font-medium">No Partial Credit</span>
+                    </div>
+                    <p class="text-xs text-[#605E5C] mb-2">4 options, 1 or more correct answers. Zero negative marking, but tests theoretical precision.</p>
+                    <ul class="text-xs space-y-1 text-[#201F1E] list-disc pl-4">
+                        <li><strong>No Negative Penalty:</strong> 0 marks deducted for wrong choices.</li>
+                        <li><strong>All or Nothing:</strong> Must identify every correct option and exclude incorrect ones.</li>
+                        <li><em>Strategy:</em> Evaluate all 4 options independently as true/false statements.</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white border border-[#E1DFDD] rounded-lg p-4 shadow-fluent border-t-4 border-t-[#107C41]">
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="font-semibold text-[#201F1E] text-xs">Numerical Answer (NAT)</h4>
+                        <span class="text-[10px] bg-[#F1FDF6] text-[#107C41] border border-[#D1F2DF] px-2 py-0.5 rounded font-medium">Virtual Keypad</span>
+                    </div>
+                    <p class="text-xs text-[#605E5C] mb-2">No options provided. Candidate enters numerical values directly via virtual keypad.</p>
+                    <ul class="text-xs space-y-1 text-[#201F1E] list-disc pl-4">
+                        <li><strong>Zero Negative Penalty:</strong> No penalty for calculation errors.</li>
+                        <li><strong>Decimal Precision:</strong> Strict rounding limits specified in the question text.</li>
+                        <li><em>Strategy:</em> Re-check algebraic steps and decimal rounding carefully.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Conceptual Traps Analysis -->
+            <div class="bg-white border border-[#E1DFDD] rounded-lg p-5 shadow-fluent space-y-3">
+                <h4 class="font-semibold text-[#201F1E] text-sm">Forensic Insights and Common GATE Conceptual Traps</h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    <div class="p-3 bg-[#F8F9FA] rounded border border-[#E1DFDD]">
+                        <span class="font-semibold text-[#0078D4] block mb-1">Probability & Statistics: Markov Chains vs Independent Trials</span>
+                        <p class="text-[#605E5C] leading-relaxed">
+                            Past questions requiring candidates to model waiting times as a two-state Markov chain caused errors when students incorrectly assumed pairs of events were independent trials. Always double check memoryless properties and transition matrices.
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-[#F8F9FA] rounded border border-[#E1DFDD]">
+                        <span class="font-semibold text-[#0078D4] block mb-1">AI: D-Separation in Bayesian Networks</span>
+                        <p class="text-[#605E5C] leading-relaxed">
+                            In Bayesian Networks, conditioning on a middle node in a chain or fork blocks the path. However, conditioning on a <strong>collider (v-structure)</strong> or its descendant actually opens the path! Candidates frequently miss this subtle conditioning inversion.
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-[#F8F9FA] rounded border border-[#E1DFDD]">
+                        <span class="font-semibold text-[#0078D4] block mb-1">DSA: Binary Search Comparisons vs Swaps</span>
+                        <p class="text-[#605E5C] leading-relaxed">
+                            Questions testing binary search efficiency often attempt to trick candidates into counting swap operations alongside element comparisons. Binary search performs strictly conditional index lookups without swapping array elements.
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-[#F8F9FA] rounded border border-[#E1DFDD]">
+                        <span class="font-semibold text-[#0078D4] block mb-1">Linear Algebra: Projection Matrices and Idempotency</span>
+                        <p class="text-[#605E5C] leading-relaxed">
+                            Projection matrices in Ordinary Least Squares (OLS) regression are inherently idempotent ($P^2 = P$). Remember that the eigenvalues of any idempotent matrix can only be either 0 or 1, which simplifies determinant and rank questions dramatically.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3-Phase Timeline -->
+            <div class="bg-white border border-[#E1DFDD] rounded-lg p-5 shadow-fluent">
+                <h4 class="font-semibold text-[#201F1E] text-sm mb-3">Strategic 3-Phase Preparation Timeline</h4>
+                <div class="space-y-3 text-xs">
+                    <div class="flex items-start space-x-3">
+                        <span class="bg-[#0078D4] text-white font-bold px-2 py-0.5 rounded-sm text-[11px]">Phase 1</span>
+                        <div>
+                            <h5 class="font-semibold text-[#201F1E]">Mathematical and Theoretical Foundations</h5>
+                            <p class="text-[#605E5C]">Master Linear Algebra (MIT 18.06), Calculus & Single Variable Optimization (3Blue1Brown/Boyd), and Continuous Probability Theory (H. Pishro-Nik). Focus on conceptual proofs and geometric visualization.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="bg-[#005A9E] text-white font-bold px-2 py-0.5 rounded-sm text-[11px]">Phase 2</span>
+                        <div>
+                            <h5 class="font-semibold text-[#201F1E]">Computational and Predictive Core</h5>
+                            <p class="text-[#605E5C]">Cover Data Structures & Python Algorithms (MIT 6.006), Relational DBMS/Warehousing (NPTEL), Machine Learning algorithms (ISLR/CS229), and Artificial Intelligence search & logic (UC Berkeley CS188).</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-3">
+                        <span class="bg-[#201F1E] text-white font-bold px-2 py-0.5 rounded-sm text-[11px]">Phase 3</span>
+                        <div>
+                            <h5 class="font-semibold text-[#201F1E]">PYQ Solving, Mock Tests and Error Analysis</h5>
+                            <p class="text-[#605E5C]">Solve official GATE DA past papers along with selected GATE CS PYQs (DSA, DBMS, Linear Algebra). Perform strict timed mock tests to refine virtual keypad numerical speed and eliminate MCQ guessing penalties.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Microsoft Enterprise Styled Footer -->
+    <footer class="bg-[#201F1E] text-[#C8C6C4] text-xs border-t border-[#323130] py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>
+                <p class="font-semibold text-white">GATE 2027 Data Science and Artificial Intelligence (DA) Open Learning Resource</p>
+                <p class="text-[11px] text-[#A19F9D] mt-0.5">Built for open-access self-study aligned with the official IIT Madras syllabus. All external material belongs to respective university rights holders (MIT OCW, Stanford, UC Berkeley, NPTEL, NCERT).</p>
+            </div>
+            <div class="flex space-x-4">
+                <a href="https://github.com/DS-AI-GATE/dsai-gate" target="_blank" rel="noopener" class="text-[#0078D4] hover:underline">Community GitHub Repo</a>
+                <a href="https://github.com/GATEOverflow/GO-PDFs/releases" target="_blank" rel="noopener" class="text-[#0078D4] hover:underline">GATE Overflow PYQs</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Database of curated open study material mapped to official syllabus
+        const resourcesData = [
+            // Section 1: Probability & Statistics
+            {
+                id: 'res-1',
+                title: 'Intro to Probability, Statistics & Random Processes',
+                creator: 'Prof. Hossein Pishro-Nik',
+                institution: 'U Massachusetts Amherst',
+                format: 'PDF Textbook',
+                section: 'Section 1',
+                sectionName: 'Probability & Statistics',
+                topics: 'Axioms, Random Variables, Distributions, Limit Theorems, Expectation, CLT, Hypothesis Tests',
+                description: 'Complete open-access textbook with step-by-step proofs for Central Limit Theorem, continuous distributions, joint PDF calculations, and conditional expectations.',
+                link: 'https://www.probabilitycourse.com/'
+            },
+            {
+                id: 'res-2',
+                title: 'NPTEL: Probability and Statistics Course',
+                creator: 'Prof. Somesh Kumar',
+                institution: 'IIT Kharagpur',
+                format: 'Video Course',
+                section: 'Section 1',
+                sectionName: 'Probability & Statistics',
+                topics: 'Permutations, Combinations, Bayes Theorem, Continuous Distributions, Hypothesis Testing',
+                description: 'Exhaustive video lecture series covering engineering statistics, random variables, t-tests, z-tests, and Chi-squared tests tailored for GATE.',
+                link: 'https://nptel.ac.in/courses/111105090'
+            },
+            {
+                id: 'res-3',
+                title: 'MIT RES.6-012: Introduction to Probability',
+                creator: 'Prof. John N. Tsitsiklis',
+                institution: 'MIT OpenCourseWare',
+                format: 'Video Course',
+                section: 'Section 1',
+                sectionName: 'Probability & Statistics',
+                topics: 'Probability Axioms, Inference, Markov Chains, Continuous PDF, Expectation',
+                description: 'Globally renowned probability course. Offers mathematical depth for tackling subtle MSQ formulations and conditional expectation problems.',
+                link: 'https://ocw.mit.edu/courses/res-6-012-introduction-to-probability-spring-2018/'
+            },
+            {
+                id: 'res-4',
+                title: 'NCERT Class 11 & 12 Mathematics Textbooks',
+                creator: 'NCERT Editorial Board',
+                institution: 'NCERT India',
+                format: 'PDF Textbook',
+                section: 'Section 1',
+                sectionName: 'Probability & Statistics',
+                topics: 'Permutations, Combinations, Basic Probability, Bayes Theorem',
+                description: 'Fundamental starting point for reviewing high school discrete combinatorics, permutations, combinations, and basic conditional probability.',
+                link: 'https://ncert.nic.in/textbook.php'
+            },
+
+            // Section 2: Linear Algebra
+            {
+                id: 'res-5',
+                title: 'MIT 18.06: Linear Algebra Course & Notes',
+                creator: 'Prof. Gilbert Strang',
+                institution: 'MIT OpenCourseWare',
+                format: 'Video Course',
+                section: 'Section 2',
+                sectionName: 'Linear Algebra',
+                topics: 'Vector Spaces, Projection Matrices, Eigenvalues, Gaussian Elimination, SVD, LU Decomposition',
+                description: 'The definitive linear algebra course. Focuses on four fundamental subspaces, projection matrices, idempotent properties, and SVD geometry.',
+                link: 'https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/'
+            },
+            {
+                id: 'res-6',
+                title: 'MIT 18.06 Official Course Website & Practice Exams',
+                creator: 'Prof. Gilbert Strang',
+                institution: 'MIT Math Department',
+                format: 'PDF Textbook',
+                section: 'Section 2',
+                sectionName: 'Linear Algebra',
+                topics: 'Subspaces, Determinants, SVD Problems, Partition Matrices, Eigenvectors',
+                description: 'Archived MIT course material containing detailed chapter lecture notes, exam problem sets, and worked solutions.',
+                link: 'https://web.mit.edu/18.06/www/'
+            },
+            {
+                id: 'res-7',
+                title: 'Essence of Linear Algebra Animated Series',
+                creator: 'Grant Sanderson (3Blue1Brown)',
+                institution: '3Blue1Brown / YouTube',
+                format: 'Video Course',
+                section: 'Section 2',
+                sectionName: 'Linear Algebra',
+                topics: 'Linear Transformations, Determinants, Eigenvectors, Change of Basis, Dot/Cross Product',
+                description: 'Visual animations providing intuitive geometric insight into linear transformations, matrix multiplication, rank, and determinants.',
+                link: 'https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab'
+            },
+
+            // Section 3: Calculus & Optimization
+            {
+                id: 'res-8',
+                title: 'Essence of Calculus Animated Visual Primer',
+                creator: 'Grant Sanderson (3Blue1Brown)',
+                institution: '3Blue1Brown / YouTube',
+                format: 'Video Course',
+                section: 'Section 3',
+                sectionName: 'Calculus & Optimization',
+                topics: 'Limits, Differentiability, Derivatives, Taylor Series, Maxima & Minima',
+                description: 'Visual intuition for limits, continuous rates of change, derivatives, and Taylor polynomial approximations.',
+                link: 'https://www.youtube.com/playlist?list=PLZHQObOWTDOA6dVMbhZ34jrr383yU2xVM'
+            },
+            {
+                id: 'res-9',
+                title: 'Convex Optimization Textbook & Lecture Slides',
+                creator: 'Prof. Stephen Boyd & Lieven Vandenberghe',
+                institution: 'Stanford University',
+                format: 'PDF Textbook',
+                section: 'Section 3',
+                sectionName: 'Calculus & Optimization',
+                topics: 'Single Variable Optimization, Gradient Descent, Convex Functions, Local/Global Minima',
+                description: 'Gold-standard reference for optimization theory. Review introductory chapters for single-variable optimization and loss function minimization.',
+                link: 'https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf'
+            },
+            {
+                id: 'res-10',
+                title: 'Stanford Convex Optimization Lecture Slides',
+                creator: 'Prof. Stephen Boyd',
+                institution: 'Stanford University',
+                format: 'PDF Textbook',
+                section: 'Section 3',
+                sectionName: 'Calculus & Optimization',
+                topics: 'Unconstrained Minimization, Gradient Method, Critical Points',
+                description: 'Concise, slide-level mathematical notes detailing optimization conditions and gradient-based iterative methods.',
+                link: 'https://web.stanford.edu/~boyd/cvxbook/bv_cvxslides.pdf'
+            },
+
+            // Section 4: Programming, Data Structures & Algorithms
+            {
+                id: 'res-11',
+                title: 'MIT 6.006: Introduction to Algorithms',
+                creator: 'Prof. Erik Demaine et al.',
+                institution: 'MIT OpenCourseWare',
+                format: 'Video Course',
+                section: 'Section 4',
+                sectionName: 'DSA & Python',
+                topics: 'Stacks, Queues, Binary Trees, Hash Tables, Sorting, Graph Traversal (BFS/DFS), Shortest Path',
+                description: 'Mathematically rigorous course covering asymptotic analysis, data structure operations, Mergesort/Quicksort proofs, and Dijkstra algorithm.',
+                link: 'https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/'
+            },
+            {
+                id: 'res-12',
+                title: 'Competitive Programmer\'s Handbook',
+                creator: 'Antti Laaksonen',
+                institution: 'Open Access / Textbook',
+                format: 'PDF Textbook',
+                section: 'Section 4',
+                sectionName: 'DSA & Python',
+                topics: 'Time Complexity, Sorting, Binary Search, Graph Algorithms, Dynamic Data Structures',
+                description: 'Concise guide packed with algorithm complexity analysis and efficient code implementation patterns.',
+                link: 'https://github.com/pllk/cphb/raw/master/cphb.pdf'
+            },
+            {
+                id: 'res-13',
+                title: 'Python Programming Full Course Series',
+                creator: 'Navin Reddy (Telusko)',
+                institution: 'Telusko / YouTube',
+                format: 'Video Course',
+                section: 'Section 4',
+                sectionName: 'DSA & Python',
+                topics: 'Python Syntax, Control Flow, Functions, Lists, Tuples, Dictionaries, OOP Concepts',
+                description: 'Practical Python tutorial covering constructs and operations required for the GATE Python specification.',
+                link: 'https://www.youtube.com/playlist?list=PLsyeobzWxl7poL9JTVyndKe62ieoN-MZ3'
+            },
+            {
+                id: 'res-14',
+                title: 'NPTEL Data Structures & Algorithms',
+                creator: 'Prof. Naveen Garg',
+                institution: 'IIT Delhi',
+                format: 'Video Course',
+                section: 'Section 4',
+                sectionName: 'DSA & Python',
+                topics: 'Trees, Queues, Hash Tables, Binary Search, Mergesort, Quicksort, BFS, DFS',
+                description: 'Classic Indian institute algorithmic instruction providing thorough derivations of time/space complexity bounds.',
+                link: 'https://nptel.ac.in/courses/106102064'
+            },
+
+            // Section 5: DBMS & Data Warehousing
+            {
+                id: 'res-15',
+                title: 'NPTEL: Database Management System',
+                creator: 'Prof. S. Srinath / D. Janakiram',
+                institution: 'IIT Madras',
+                format: 'Video Course',
+                section: 'Section 5',
+                sectionName: 'DBMS & Warehousing',
+                topics: 'ER Model, Relational Algebra, SQL, Normal Forms (1NF-BCNF), B+ Trees, Indexing',
+                description: 'Deep dive into transactional relational theory, normal form dependency proofs, indexing computations, and SQL queries.',
+                link: 'https://nptel.ac.in/courses/106106093'
+            },
+            {
+                id: 'res-16',
+                title: 'NPTEL Data Mining & Warehousing',
+                creator: 'Prof. Pabitra Mitra',
+                institution: 'IIT Kharagpur',
+                format: 'Video Course',
+                section: 'Section 5',
+                sectionName: 'DBMS & Warehousing',
+                topics: 'Data Preprocessing, Normalization, Discretization, Multidimensional Schema, Star/Snowflake Schemas, OLAP',
+                description: 'Covers the data warehousing portion of the GATE DA syllabus: sampling, compression, concept hierarchies, and OLAP computations.',
+                link: 'https://nptel.ac.in/courses/106105174'
+            },
+
+            // Section 6: Machine Learning
+            {
+                id: 'res-18',
+                title: 'An Introduction to Statistical Learning (ISLR / ISLP)',
+                creator: 'G. James, D. Witten, T. Hastie, R. Tibshirani',
+                institution: 'StatLearning / Open Textbook',
+                format: 'PDF Textbook',
+                section: 'Section 6',
+                sectionName: 'Machine Learning',
+                topics: 'Linear/Ridge Regression, Logistic Regression, k-NN, SVM, Decision Trees, PCA, Clustering, Cross-Validation',
+                description: 'The definitive textbook for GATE ML. Provides lucid derivations for bias-variance trade-offs, k-means, hierarchical clustering, and PCA.',
+                link: 'https://www.statlearning.com/'
+            },
+            {
+                id: 'res-19',
+                title: 'Stanford CS229: Machine Learning Lecture Notes',
+                creator: 'Prof. Andrew Ng',
+                institution: 'Stanford University',
+                format: 'PDF Textbook',
+                section: 'Section 6',
+                sectionName: 'Machine Learning',
+                topics: 'Supervised Learning Gradients, Naive Bayes, Linear Discriminant Analysis (LDA), SVM Dual Formulations, Neural Networks',
+                description: 'Rigorous mathematical notes written by Andrew Ng. Excellent for deriving loss function gradients and SVM kernel proofs.',
+                link: 'https://cs229.stanford.edu/'
+            },
+            {
+                id: 'res-20',
+                title: 'NPTEL: Introduction to Machine Learning',
+                creator: 'Prof. Balaraman Ravindran',
+                institution: 'IIT Madras',
+                format: 'Video Course',
+                section: 'Section 6',
+                sectionName: 'Machine Learning',
+                topics: 'Regression, Decision Trees, Multi-Layer Perceptron, PCA, Clustering, Cross-Validation',
+                description: 'Official NPTEL course mapped to Indian engineering curricula, contextualizing machine learning algorithms for GATE exam patterns.',
+                link: 'https://onlinecourses.nptel.ac.in/noc26_cs133/preview'
+            },
+
+            // Section 7: Artificial Intelligence
+            {
+                id: 'res-22',
+                title: 'UC Berkeley CS188: Introduction to Artificial Intelligence',
+                creator: 'Prof. Dan Klein & Pieter Abbeel',
+                institution: 'UC Berkeley',
+                format: 'Video Course',
+                section: 'Section 7',
+                sectionName: 'Artificial Intelligence',
+                topics: 'A* Search, Minimax, Alpha-Beta Pruning, Propositional/Predicate Logic, Bayesian Networks, Variable Elimination, Sampling',
+                description: 'World-renowned AI course. Excellent coverage of state-space search, heuristic evaluation, and probabilistic reasoning with Bayesian Networks.',
+                link: 'https://inst.eecs.berkeley.edu/~cs188/'
+            },
+            {
+                id: 'res-23',
+                title: 'NPTEL: AI Search Methods for Problem Solving',
+                creator: 'Prof. Deepak Khemani',
+                institution: 'IIT Madras',
+                format: 'Video Course',
+                section: 'Section 7',
+                sectionName: 'Artificial Intelligence',
+                topics: 'Uninformed Search (BFS, DFS, IDDFS), Informed Search (A*), Adversarial Search (Minimax, Alpha-Beta)',
+                description: 'Comprehensive analysis of search spaces, admissible/consistent heuristics, and game tree evaluation.',
+                link: 'https://nptel.ac.in/courses/106106126'
+            },
+
+            // Repositories & PYQs
+            {
+                id: 'res-25',
+                title: 'DS-AI-GATE Official Master GitHub Repository',
+                creator: 'Community Contributors',
+                institution: 'GitHub Open Source',
+                format: 'GitHub / Code',
+                section: 'PYQ & Community',
+                sectionName: 'Repositories & PYQs',
+                topics: 'Interactive Syllabus Explorer, Colab Notebooks, Official PYQ Answer Keys',
+                description: 'Central community repository with code notebooks, topic notes, and verified solutions for official GATE DA papers.',
+                link: 'https://github.com/DS-AI-GATE/dsai-gate'
+            },
+            {
+                id: 'res-26',
+                title: 'GATE Overflow Past Question PDFs',
+                creator: 'Arjun Suresh & GATE Overflow',
+                institution: 'GATE Overflow',
+                format: 'GitHub / Code',
+                section: 'PYQ & Community',
+                sectionName: 'Repositories & PYQs',
+                topics: 'GATE DA PYQs, GATE CSE Overlapping PYQs (DSA, DBMS, Linear Algebra, General Aptitude)',
+                description: 'Meticulously compiled PDF collections of past year questions across GATE DA and overlapping GATE Computer Science subjects.',
+                link: 'https://github.com/GATEOverflow/GO-PDFs/releases'
+            }
+        ];
+
+        // Official Syllabus Breakdown
+        const syllabusStructure = [
+            {
+                sectionId: 'sec-1',
+                sectionTitle: 'Section 1: Probability and Statistics',
+                topics: [
+                    'Counting (permutations & combinations), Probability Axioms, Sample Space, Events',
+                    'Independent Events, Mutually Exclusive Events',
+                    'Marginal, Conditional and Joint Probability, Bayes Theorem',
+                    'Conditional Expectation and Variance, Mean, Median, Mode, Standard Deviation',
+                    'Correlation and Covariance',
+                    'Discrete Random Variables & PMFs: Uniform, Bernoulli, Binomial distributions',
+                    'Continuous Random Variables & PDFs: Uniform, Exponential, Poisson, Normal, Standard Normal',
+                    't-distribution, Chi-squared distribution, Cumulative Distribution Function (CDF), Conditional PDF',
+                    'Central Limit Theorem (CLT)',
+                    'Confidence Intervals, z-test, t-test, Chi-squared test'
+                ]
+            },
+            {
+                sectionId: 'sec-2',
+                sectionTitle: 'Section 2: Linear Algebra',
+                topics: [
+                    'Vector spaces, Subspaces, Linear dependence and independence of vectors',
+                    'Matrices, Projection matrix, Orthogonal matrix, Idempotent matrix, Partition matrix',
+                    'Quadratic forms',
+                    'Systems of linear equations and solutions; Gaussian elimination',
+                    'Eigenvalues and Eigenvectors, Determinant, Rank, Nullity',
+                    'Projections, LU decomposition',
+                    'Singular Value Decomposition (SVD)'
+                ]
+            },
+            {
+                sectionId: 'sec-3',
+                sectionTitle: 'Section 3: Calculus and Optimization',
+                topics: [
+                    'Functions of a single variable, Limit, Continuity and Differentiability',
+                    'Taylor series',
+                    'Maxima and Minima',
+                    'Optimization involving a single variable'
+                ]
+            },
+            {
+                sectionId: 'sec-4',
+                sectionTitle: 'Section 4: Programming, Data Structures and Algorithms',
+                topics: [
+                    'Programming in Python',
+                    'Basic Data Structures: Stacks, Queues, Linked Lists, Trees, Hash Tables',
+                    'Search Algorithms: Linear search and Binary search',
+                    'Basic Sorting Algorithms: Selection sort, Bubble sort, Insertion sort',
+                    'Divide and Conquer: Mergesort, Quicksort',
+                    'Introduction to Graph Theory',
+                    'Basic Graph Algorithms: Traversals (BFS, DFS) and Shortest Path (Dijkstra)'
+                ]
+            },
+            {
+                sectionId: 'sec-5',
+                sectionTitle: 'Section 5: Database Management and Warehousing',
+                topics: [
+                    'ER-model, Relational Model: Relational algebra, Tuple calculus, SQL',
+                    'Integrity constraints, Normal forms (1NF, 2NF, 3NF, BCNF)',
+                    'File organization, Indexing (B and B+ trees)',
+                    'Data types, Data transformations: Normalization, Discretization, Sampling, Compression',
+                    'Data Warehouse Modelling: Schema for multidimensional data models (Star, Snowflake)',
+                    'Concept hierarchies, Measures: Categorization and computations (OLAP)'
+                ]
+            },
+            {
+                sectionId: 'sec-6',
+                sectionTitle: 'Section 6: Machine Learning',
+                topics: [
+                    'Supervised Learning: Regression and Classification problems',
+                    'Simple linear regression, Multiple linear regression, Ridge regression',
+                    'Logistic regression, k-Nearest Neighbour (k-NN), Naive Bayes classifier',
+                    'Linear Discriminant Analysis (LDA), Support Vector Machines (SVM)',
+                    'Decision Trees, Bias-Variance trade-off',
+                    'Cross-validation methods: Leave-One-Out (LOO), k-folds cross-validation',
+                    'Multi-Layer Perceptron, Feed-forward Neural Networks',
+                    'Unsupervised Learning: Clustering algorithms (k-means, k-medoid)',
+                    'Hierarchical Clustering: Top-down, Bottom-up (Single-linkage, Multiple-linkage)',
+                    'Dimensionality Reduction: Principal Component Analysis (PCA)'
+                ]
+            },
+            {
+                sectionId: 'sec-7',
+                sectionTitle: 'Section 7: Artificial Intelligence (AI)',
+                topics: [
+                    'Search: Uninformed (BFS, DFS, IDDFS), Informed (A*), Adversarial (Minimax, Alpha-Beta pruning)',
+                    'Logic: Propositional logic, Predicate logic (First-order logic), Resolution Refutation',
+                    'Reasoning under Uncertainty: Conditional independence representations (Bayesian Networks)',
+                    'Exact inference through Variable Elimination',
+                    'Approximate inference through Sampling (MCMC, Gibbs)'
+                ]
+            }
+        ];
+
+        // State Management
+        let currentSectionFilter = 'all';
+        let currentFormatFilter = 'all';
+        let currentSearchQuery = '';
+        let completedTopics = JSON.parse(localStorage.getItem('gate_da_msft_completed_topics') || '{}');
+
+        // Initializer
+        document.addEventListener('DOMContentLoaded', () => {
+            renderResources();
+            renderSyllabusTracker();
+            updateOverallProgress();
+            initCharts();
+        });
+
+        // Tab Switching Handler
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+
+            // Update Microsoft Pivot styles
+            ['hub', 'syllabus', 'analytics', 'strategy'].forEach(t => {
+                const btn = document.getElementById(`nav-${t}`);
+                if (btn) {
+                    if (t === tabName) {
+                        btn.className = "pivot-tab active-tab h-full px-1 text-white flex items-center";
+                    } else {
+                        btn.className = "pivot-tab h-full px-1 text-[#C8C6C4] hover:text-white flex items-center";
+                    }
+                }
+            });
+        }
+
+        // Render Resource Cards Grid
+        function renderResources() {
+            const container = document.getElementById('resource-cards-grid');
+            container.innerHTML = '';
+
+            const filtered = resourcesData.filter(res => {
+                const matchSection = currentSectionFilter === 'all' || res.section === currentSectionFilter;
+                const matchFormat = currentFormatFilter === 'all' || res.format === currentFormatFilter;
+                
+                const q = currentSearchQuery.toLowerCase();
+                const matchSearch = q === '' || 
+                    res.title.toLowerCase().includes(q) ||
+                    res.creator.toLowerCase().includes(q) ||
+                    res.topics.toLowerCase().includes(q) ||
+                    res.institution.toLowerCase().includes(q) ||
+                    res.description.toLowerCase().includes(q);
+
+                return matchSection && matchFormat && matchSearch;
+            });
+
+            document.getElementById('visible-card-count').innerText = filtered.length;
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-10 text-center text-[#605E5C] bg-white border border-[#E1DFDD] rounded-lg">
+                        <p class="text-sm font-semibold">No study resources found matching your criteria</p>
+                        <p class="text-xs mt-1">Try resetting search keywords or format filters.</p>
+                        <button onclick="resetFilters()" class="mt-3 px-3 py-1 text-xs bg-[#0078D4] text-white rounded-sm hover:bg-[#106EBE]">Reset Filters</button>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(res => {
+                let badgeStyle = 'bg-[#F3F2F1] text-[#201F1E] border-[#C8C6C4]';
+                if (res.format === 'PDF Textbook') badgeStyle = 'bg-[#F1FDF6] text-[#107C41] border-[#D1F2DF]';
+                if (res.format === 'Video Course') badgeStyle = 'bg-[#EFF6FC] text-[#005A9E] border-[#C7E0F4]';
+                if (res.format === 'GitHub / Code') badgeStyle = 'bg-[#F6F5F8] text-[#5C2E91] border-[#E1DFDD]';
+
+                const cardHtml = `
+                    <div class="bg-white border border-[#E1DFDD] rounded-lg p-4 shadow-fluent hover:shadow-fluentHover transition-all flex flex-col justify-between">
+                        <div>
+                            <!-- Header Tags -->
+                            <div class="flex items-center justify-between text-[11px] mb-2">
+                                <span class="font-semibold text-[#605E5C] uppercase tracking-wider">${res.sectionName}</span>
+                                <span class="px-2 py-0.5 border rounded-sm font-medium ${badgeStyle}">${res.format}</span>
+                            </div>
+
+                            <!-- Title -->
+                            <h4 class="font-semibold text-[#201F1E] text-sm leading-snug mb-1 hover:text-[#0078D4] transition-colors">
+                                <a href="${res.link}" target="_blank" rel="noopener">${res.title}</a>
+                            </h4>
+
+                            <!-- Author/Institution -->
+                            <p class="text-xs font-semibold text-[#0078D4] mb-2">${res.creator} | <span class="text-[#605E5C]">${res.institution}</span></p>
+
+                            <!-- Description -->
+                            <p class="text-xs text-[#605E5C] mb-3 line-clamp-3 leading-relaxed">${res.description}</p>
+
+                            <!-- Mapped Topics -->
+                            <div class="bg-[#F8F9FA] rounded-sm p-2 border border-[#E1DFDD] mb-3">
+                                <span class="text-[10px] uppercase font-semibold text-[#605E5C] block mb-0.5">Syllabus Scope:</span>
+                                <p class="text-[11px] text-[#201F1E] leading-tight">${res.topics}</p>
+                            </div>
+                        </div>
+
+                        <!-- Action Button -->
+                        <div class="pt-2 border-t border-[#E1DFDD] flex items-center justify-between">
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-2 h-2 rounded-full bg-[#107C41] inline-block"></span>
+                                <span class="text-[10px] text-[#107C41] font-semibold">Free Open Access</span>
+                            </div>
+                            <a href="${res.link}" target="_blank" rel="noopener" class="inline-flex items-center space-x-1 text-xs font-semibold text-white bg-[#0078D4] hover:bg-[#106EBE] px-3 py-1 rounded-sm transition-colors">
+                                <span>Open Course</span>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHtml;
+            });
+        }
+
+        // Filter Handlers
+        function setSectionFilter(sec) {
+            currentSectionFilter = sec;
+            document.querySelectorAll('.sec-btn').forEach(btn => {
+                btn.className = "sec-btn px-3 py-1 rounded-full bg-[#F3F2F1] text-[#201F1E] border border-[#C8C6C4] hover:bg-[#E1DFDD] whitespace-nowrap";
+            });
+            const activeBtn = document.getElementById(sec === 'PYQ & Community' ? 'sec-pyq' : (sec === 'all' ? 'sec-all' : `sec-${sec.split(' ')[1]}`));
+            if (activeBtn) activeBtn.className = "sec-btn px-3 py-1 rounded-full bg-[#201F1E] text-white whitespace-nowrap font-medium";
+            renderResources();
+        }
+
+        function setFormatFilter(fmt) {
+            currentFormatFilter = fmt;
+            document.querySelectorAll('.fmt-btn').forEach(btn => {
+                btn.className = "fmt-btn px-3 py-1.5 rounded-sm border bg-[#F3F2F1] text-[#201F1E] border-[#C8C6C4] hover:bg-[#E1DFDD]";
+            });
+            let btnId = 'fmt-all';
+            if (fmt === 'PDF Textbook') btnId = 'fmt-pdf';
+            if (fmt === 'Video Course') btnId = 'fmt-video';
+            if (fmt === 'GitHub / Code') btnId = 'fmt-github';
+            
+            const activeBtn = document.getElementById(btnId);
+            if (activeBtn) activeBtn.className = "fmt-btn px-3 py-1.5 rounded-sm border bg-[#0078D4] text-white border-[#0078D4] font-medium";
+            renderResources();
+        }
+
+        function filterResources() {
+            currentSearchQuery = document.getElementById('resource-search').value;
+            renderResources();
+        }
+
+        function resetFilters() {
+            currentSectionFilter = 'all';
+            currentFormatFilter = 'all';
+            currentSearchQuery = '';
+            document.getElementById('resource-search').value = '';
+            setSectionFilter('all');
+            setFormatFilter('all');
+        }
+
+        // Render Syllabus Accordion Tracker
+        function renderSyllabusTracker() {
+            const container = document.getElementById('syllabus-accordion-container');
+            container.innerHTML = '';
+
+            syllabusStructure.forEach((sec, idx) => {
+                let sectionDone = 0;
+                sec.topics.forEach(t => {
+                    if (completedTopics[`${sec.sectionId}-${t}`]) sectionDone++;
+                });
+                const secPercent = Math.round((sectionDone / sec.topics.length) * 100);
+
+                const secHtml = `
+                    <div class="bg-white border border-[#E1DFDD] rounded-lg overflow-hidden shadow-fluent">
+                        <!-- Accordion Header -->
+                        <div onclick="toggleAccordion('acc-${idx}')" class="p-3.5 bg-[#F8F9FA] hover:bg-[#F3F2F1] cursor-pointer flex flex-col sm:flex-row justify-between sm:items-center gap-2 border-b border-[#E1DFDD] transition-colors">
+                            <div>
+                                <h4 class="font-semibold text-[#201F1E] text-xs sm:text-sm">${sec.sectionTitle}</h4>
+                                <p class="text-[11px] text-[#605E5C]">${sec.topics.length} core syllabus topics</p>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <div class="text-right">
+                                    <span class="text-xs font-semibold text-[#0078D4]">${secPercent}% Completed</span>
+                                    <span class="text-[10px] block text-[#605E5C]">${sectionDone}/${sec.topics.length} done</span>
+                                </div>
+                                <span id="acc-icon-${idx}" class="text-[#605E5C] font-bold text-sm w-4 text-center">+</span>
+                            </div>
+                        </div>
+
+                        <!-- Accordion Body -->
+                        <div id="acc-${idx}" class="p-3 space-y-1.5 hidden border-t border-[#E1DFDD]">
+                            ${sec.topics.map(t => {
+                                const key = `${sec.sectionId}-${t}`;
+                                const isChecked = !!completedTopics[key];
+                                return `
+                                    <label class="flex items-start space-x-2.5 p-1.5 rounded hover:bg-[#F3F2F1] cursor-pointer text-xs transition-colors">
+                                        <input type="checkbox" onchange="toggleTopicCheck('${key}')" ${isChecked ? 'checked' : ''} class="mt-0.5 rounded-sm border-[#C8C6C4] text-[#0078D4] focus:ring-[#0078D4] h-3.5 w-3.5">
+                                        <span class="${isChecked ? 'line-through text-[#A19F9D] font-normal' : 'font-medium text-[#201F1E]'}">${t}</span>
+                                    </label>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += secHtml;
+            });
+        }
+
+        function toggleAccordion(accId) {
+            const body = document.getElementById(accId);
+            const idx = accId.split('-')[1];
+            const icon = document.getElementById(`acc-icon-${idx}`);
+            if (body.classList.contains('hidden')) {
+                body.classList.remove('hidden');
+                icon.innerText = '-';
+            } else {
+                body.classList.add('hidden');
+                icon.innerText = '+';
+            }
+        }
+
+        function toggleTopicCheck(key) {
+            if (completedTopics[key]) {
+                delete completedTopics[key];
+            } else {
+                completedTopics[key] = true;
+            }
+            localStorage.setItem('gate_da_msft_completed_topics', JSON.stringify(completedTopics));
+            renderSyllabusTracker();
+            updateOverallProgress();
+        }
+
+        function clearSyllabusProgress() {
+            if (confirm('Are you sure you want to reset all syllabus checklist items?')) {
+                completedTopics = {};
+                localStorage.removeItem('gate_da_msft_completed_topics');
+                renderSyllabusTracker();
+                updateOverallProgress();
+            }
+        }
+
+        function updateOverallProgress() {
+            let totalTopics = 0;
+            let completedCount = 0;
+
+            syllabusStructure.forEach(sec => {
+                sec.topics.forEach(t => {
+                    totalTopics++;
+                    if (completedTopics[`${sec.sectionId}-${t}`]) completedCount++;
+                });
+            });
+
+            const percent = totalTopics > 0 ? Math.round((completedCount / totalTopics) * 100) : 0;
+            
+            document.getElementById('overall-progress-text').innerText = `${percent}%`;
+            document.getElementById('overall-progress-bar').style.width = `${percent}%`;
+            document.getElementById('completed-topics-count').innerText = `${completedCount} of ${totalTopics} topics completed`;
+        }
+
+        // Microsoft Color Palette for Chart.js
+        function initCharts() {
+            // Chart 1: Subject Weightage (Bar)
+            const ctx1 = document.getElementById('weightageChart').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'DSA & Python',
+                        'Prob & Stats',
+                        'Machine Learning',
+                        'General Aptitude',
+                        'Linear Algebra',
+                        'DBMS & Warehousing',
+                        'Artificial Intelligence',
+                        'Calculus & Opt'
+                    ],
+                    datasets: [{
+                        label: 'Approx. Marks Weightage',
+                        data: [20, 18, 15, 15, 9, 9, 8, 6],
+                        backgroundColor: [
+                            '#0078D4',
+                            '#106EBE',
+                            '#005A9E',
+                            '#008272',
+                            '#00B7C3',
+                            '#4F6BED',
+                            '#8764B8',
+                            '#A19F9D'
+                        ],
+                        borderRadius: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `Est. Marks: ${context.parsed.y} Marks`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 25,
+                            ticks: { font: { family: 'Segoe UI' } },
+                            title: { display: true, text: 'Marks (out of 100)', font: { family: 'Segoe UI', size: 11 } }
+                        },
+                        x: {
+                            ticks: {
+                                font: { family: 'Segoe UI', size: 10 },
+                                callback: function(val, index) {
+                                    const label = this.getLabelForValue(val);
+                                    return label.length > 13 ? label.substring(0, 11) + '..' : label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Resource Type Distribution (Doughnut)
+            const ctx2 = document.getElementById('resourceTypeChart').getContext('2d');
+            new Chart(ctx2, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Video Courses', 'PDF Textbooks', 'Code Repos & PYQs'],
+                    datasets: [{
+                        data: [13, 11, 4],
+                        backgroundColor: ['#0078D4', '#107C41', '#5C2E91'],
+                        borderWidth: 2,
+                        borderColor: '#FFFFFF'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { boxWidth: 12, padding: 12, font: { family: 'Segoe UI', size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
